@@ -89,3 +89,16 @@ WHERE einahmen_ausgaben='A'
 ORDER BY soll DESC
 LIMIT 15
 ;
+
+.print
+.print 'Die 20 größten Ausgabenposten (gruppiert nach Funktion)'
+.print
+.width 8 70 20
+SELECT h.funktion,f.funktion_text,sum(h.soll) AS summe
+FROM hh_2024 AS h
+LEFT JOIN funktion AS f ON h.funktion=f.funktion
+WHERE h.einahmen_ausgaben='A'
+GROUP BY h.funktion
+ORDER BY sum(h.soll) DESC
+LIMIT 20
+;
